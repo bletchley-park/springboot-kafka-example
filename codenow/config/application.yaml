@@ -1,0 +1,15 @@
+server:
+  port: ${SERVER_PORT:8080}
+spring:
+  main:
+    banner-mode: off
+  zipkin:
+    enabled: false
+  sleuth:
+    propagation:
+      type: B3
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus

@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="spring-kafka-producer-consumer" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="coding.example.service.Application" />
+    <option name="VM_PARAMETERS" value="-Dspring.config.additional-location=file:config/" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <envs>
+      <env name="SERVER_PORT" value="8080" />
+    </envs>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
