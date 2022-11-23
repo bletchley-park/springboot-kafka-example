@@ -1,6 +1,22 @@
 spring:
   profiles:
     active: test
+  main:
+    banner-mode: off
+    zipkin:
+      enabled: false
+    sleuth:
+      propagation:
+        type: B3
+  kafka:
+    order:
+      bootstrap-servers: localhost:9092
+      topic:
+        create-order: create-order
+      consumer:
+        group-id:
+          notification: notification
+          service: service
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
