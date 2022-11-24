@@ -10,7 +10,7 @@ spring:
       type: B3
   kafka:
     order:
-      bootstrap-servers: ${KAFKA_RESERVATION_BOOTSTRAP_SERVERS:localhost:9092}
+      bootstrap-servers: ${KAFKA_CONNECTION_BOOTSTRAP_SERVERS:localhost:9092}
       topic:
         create-order: create-order
       consumer:
