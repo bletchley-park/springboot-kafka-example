@@ -27,7 +27,7 @@ public class CreateOrderProducer {
     public boolean sendCreateOrderEvent(Order order) throws ExecutionException, InterruptedException {
         SendResult<String, Order> sendResult = createOrderKafkaTemplate.send(createOrderTopic, order).get();
         log.info("Create order {} event sent via Kafka", order);
-//        log.info(sendResult.toString());
+        log.info(sendResult.toString());
         return true;
     }
 }

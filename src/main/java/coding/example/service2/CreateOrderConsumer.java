@@ -16,7 +16,7 @@ public class CreateOrderConsumer {
     private static final Logger log = LoggerFactory.getLogger(CreateOrderConsumer.class);
 
     @KafkaListener(topics = "${spring.kafka.order.topic.create-order}", containerFactory="Service2ContainerFactory")
-    public void cancelReservationListener(@Payload Order order, Acknowledgment ack) throws ExecutionException, InterruptedException {
+    public void createOrderListener(@Payload Order order, Acknowledgment ack) throws ExecutionException, InterruptedException {
         log.info("Service2 received order {} ", order);
 //        wait(500);
         ack.acknowledge();

@@ -26,6 +26,7 @@ public class CreateOrderProducerConfig {
         return new DefaultKafkaProducerFactory(config);
     }
 
+    @Bean
     public <K, V> KafkaTemplate<K, V> createOrderKafkaTemplate(){
         return new KafkaTemplate<>(createOrderProducerFactory());
     }
