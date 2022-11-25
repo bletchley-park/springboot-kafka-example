@@ -24,7 +24,7 @@ docker-compose down
 ```
 
 ### Locally
-You can also install and run zookeeper and kafka services manually by following this tutorial: https://kafka.apache.org/quickstart
+You can also start zookeeper and kafka services manually by following this tutorial: https://kafka.apache.org/quickstart
 
 Here is the sequence of commands you should run, after you download the latest kafka release 
 
