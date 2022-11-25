@@ -12,7 +12,7 @@ spring:
     order:
       bootstrap-servers: ${KAFKA_CONNECTION_BOOTSTRAP_SERVERS:localhost:9092}
       topic:
-        create-order: create-order
+        create-order: create_order
       consumer:
         group-id:
           notification: notification
