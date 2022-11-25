@@ -8,15 +8,13 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.ExecutionException;
-
 @Service("NotificationService")
 public class CreateOrderConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(CreateOrderConsumer.class);
 
     @KafkaListener(topics = "${spring.kafka.order.topic.create-order}", containerFactory="NotificationContainerFactory")
-    public void createOrderListener(@Payload Order order, Acknowledgment ack) throws ExecutionException, InterruptedException {
+    public void createOrderListener(@Payload Order order, Acknowledgment ack) {
         log.info("Notification service received order {} ", order);
         ack.acknowledge();
     }

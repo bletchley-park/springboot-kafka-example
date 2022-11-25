@@ -1,4 +1,4 @@
-package coding.example.service2;
+package coding.example.service.instance1;
 
 import coding.example.Order;
 import org.slf4j.Logger;
@@ -8,17 +8,14 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.ExecutionException;
-
-@Service("Service2")
+@Service("Instance1")
 public class CreateOrderConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(CreateOrderConsumer.class);
 
-    @KafkaListener(topics = "${spring.kafka.order.topic.create-order}", containerFactory="Service2ContainerFactory")
-    public void createOrderListener(@Payload Order order, Acknowledgment ack) throws ExecutionException, InterruptedException {
-        log.info("Service2 received order {} ", order);
-//        wait(500);
+    @KafkaListener(topics = "${spring.kafka.order.topic.create-order}", containerFactory="Instance1ContainerFactory")
+    public void createOrderListener(@Payload Order order, Acknowledgment ack) {
+        log.info("Instance1 received order {} ", order);
         ack.acknowledge();
     }
 

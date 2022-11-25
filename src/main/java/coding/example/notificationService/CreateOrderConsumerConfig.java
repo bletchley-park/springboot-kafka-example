@@ -30,7 +30,7 @@ public class CreateOrderConsumerConfig {
     private String groupId;
 
     @Bean("NotificationConsumerFactory")
-    public ConsumerFactory<String, Order> createOrderNotificationConsumerFactory() {
+    public ConsumerFactory<String, Order> createOrderConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
@@ -44,12 +44,11 @@ public class CreateOrderConsumerConfig {
     }
 
     @Bean("NotificationContainerFactory")
-    public ConcurrentKafkaListenerContainerFactory<String, Order> createOrderNotificationKafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, Order> createOrderKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Order> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(createOrderNotificationConsumerFactory());
+        factory.setConsumerFactory(createOrderConsumerFactory());
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
         return factory;
     }
-
 }

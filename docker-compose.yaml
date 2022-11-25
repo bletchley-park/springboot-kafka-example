@@ -18,7 +18,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: "INTERNAL"
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: create-order:2:1
+      KAFKA_CREATE_TOPICS: create_order:2:1
   kafdrop:
     image: obsidiandynamics/kafdrop
     restart: "no"

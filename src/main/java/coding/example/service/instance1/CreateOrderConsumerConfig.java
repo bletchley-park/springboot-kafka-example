@@ -1,4 +1,4 @@
-package coding.example.service3;
+package coding.example.service.instance1;
 
 import coding.example.Order;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @EnableKafka
-@Configuration("Service3Configuration")
+@Configuration("Instance1Configuration")
 public class CreateOrderConsumerConfig {
 
     @Value("${spring.kafka.order.bootstrap-servers}")
@@ -29,8 +29,8 @@ public class CreateOrderConsumerConfig {
     @Value("${spring.kafka.order.consumer.group-id.service}")
     private String groupId;
 
-    @Bean("Service3ConsumerFactory")
-    public ConsumerFactory<String, Order> createOrderService3ConsumerFactory() {
+    @Bean("Instance1ConsumerFactory")
+    public ConsumerFactory<String, Order> createOrderConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
@@ -43,11 +43,11 @@ public class CreateOrderConsumerConfig {
                 new JsonDeserializer<>(Order.class));
     }
 
-    @Bean("Service3ContainerFactory")
-    public ConcurrentKafkaListenerContainerFactory<String, Order> createOrderService3KafkaListenerContainerFactory() {
+    @Bean("Instance1ContainerFactory")
+    public ConcurrentKafkaListenerContainerFactory<String, Order> createOrderKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Order> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(createOrderService3ConsumerFactory());
+        factory.setConsumerFactory(createOrderConsumerFactory());
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
         return factory;
     }
