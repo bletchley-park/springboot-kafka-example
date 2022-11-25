@@ -24,9 +24,20 @@ docker-compose down
 ```
 
 ### Locally
-You can also install and run zookeeper and kafka services manually by following this tutorial
+You can also install and run zookeeper and kafka services manually by following this tutorial: https://kafka.apache.org/quickstart
 
-https://kafka.apache.org/quickstart
+Here is the sequence of commands you should run, after you download the latest kafka release 
+
+```
+# Start the ZooKeeper service
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+
+# Start the Kafka broker service
+$ bin/kafka-server-start.sh config/server.properties
+
+# Create kafka topic "create_order" with two partitions
+$ bin/kafka-topics.sh --create --topic create_order --partitions 2 --bootstrap-server localhost:9092
+```
 
 ## Deployment configuration
 All files located in `./codenow/config` directory will be deployed alongside the application and available in `/codenow/config` directory
