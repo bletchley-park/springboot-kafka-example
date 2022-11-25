@@ -9,14 +9,16 @@ Locally running application is configured through application.yaml located in `.
 ```
 
 ## Start kafka
-To run the application, we have to first start zookeeper and kafka services
+To run the application, we have to start zookeeper and kafka services first
 
 ### With docker compose
-If you have docker installed, you can run the following command to start all services
+If you have docker installed, you use prepared docker-compose.yaml. Run the following commands to
+
+start all services
 ```
 docker-compose up
 ```
-To stop all services run
+stop all services
 ```
 docker-compose down
 ```
