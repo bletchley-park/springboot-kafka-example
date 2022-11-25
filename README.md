@@ -37,6 +37,9 @@ $ bin/kafka-server-start.sh config/server.properties
 
 # Create kafka topic "create_order" with two partitions
 $ bin/kafka-topics.sh --create --topic create_order --partitions 2 --bootstrap-server localhost:9092
+
+# Check the number of partitions
+$ bin/kafka-topics.sh --describe --topic create_order --bootstrap-server localhost:9092
 ```
 
 ## Deployment configuration
