@@ -8,12 +8,12 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
-@Service("Instance1")
+@Service("orderConsumerInstance1Service")
 public class CreateOrderConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(CreateOrderConsumer.class);
 
-    @KafkaListener(topics = "${spring.kafka.order.topic.create-order}", containerFactory="Instance1ContainerFactory")
+    @KafkaListener(topics = "${spring.kafka.order.topic.create-order}", containerFactory="containerFactoryInstance1Service")
     public void createOrderListener(@Payload Order order, Acknowledgment ack) {
         log.info("Instance1 received order {} ", order);
         ack.acknowledge();

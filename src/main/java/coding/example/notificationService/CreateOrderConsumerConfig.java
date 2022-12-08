@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @EnableKafka
-@Configuration("NotificationConfiguration")
+@Configuration("consumerConfigNotificationService")
 public class CreateOrderConsumerConfig {
 
     @Value("${spring.kafka.order.bootstrap-servers}")
@@ -29,7 +29,7 @@ public class CreateOrderConsumerConfig {
     @Value("${spring.kafka.order.consumer.group-id.notification}")
     private String groupId;
 
-    @Bean("NotificationConsumerFactory")
+    @Bean("orderConsumerFactoryNotificationService")
     public ConsumerFactory<String, Order> createOrderConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
@@ -43,7 +43,7 @@ public class CreateOrderConsumerConfig {
                 new JsonDeserializer<>(Order.class));
     }
 
-    @Bean("NotificationContainerFactory")
+    @Bean("containerFactoryNotificationService")
     public ConcurrentKafkaListenerContainerFactory<String, Order> createOrderKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Order> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
