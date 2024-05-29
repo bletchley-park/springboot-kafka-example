@@ -1,6 +1,5 @@
-package coding.example.service.instance2;
+package com.rd.intern.app.consumer.two.service;
 
-import coding.example.Order;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -15,21 +14,25 @@ import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
+import com.rd.intern.app.consts.GlobalConsts.CONSUMER_CONFIG_SERVICE;
+import com.rd.intern.app.consts.GlobalConsts.CONSUMER_FACTORY_SERVICE;
+import com.rd.intern.app.consts.GlobalConsts.CONTAINER_FACTORY_SERVICE;
+import com.rd.intern.app.model.Order;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 @EnableKafka
-@Configuration("consumerConfigInstance2Service")
+@Configuration(CONSUMER_CONFIG_SERVICE.TWO)
 public class CreateOrderConsumerConfig {
-
     @Value("${spring.kafka.order.bootstrap-servers}")
     private String bootstrapServers;
 
     @Value("${spring.kafka.order.consumer.group-id.service}")
     private String groupId;
 
-    @Bean("consumerFactoryInstance2Service")
+    @Bean(CONSUMER_FACTORY_SERVICE.TWO)
     public ConsumerFactory<String, Order> createOrderConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
@@ -38,18 +41,22 @@ public class CreateOrderConsumerConfig {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
-
-        return new DefaultKafkaConsumerFactory<>(props,new StringDeserializer(),
-                new JsonDeserializer<>(Order.class));
+        return new DefaultKafkaConsumerFactory<>(props,new StringDeserializer(), new JsonDeserializer<>(Order.class));
     }
 
-    @Bean("containerFactoryInstance2Service")
+//    @Bean(CONTAINER_FACTORY_SERVICE.TWO)
+//    public ConcurrentKafkaListenerContainerFactory<String, Order> createOrderKafkaListenerContainerFactory(ConsumerFactory<String, Order> createOrderConsumerFactory) {
+//        ConcurrentKafkaListenerContainerFactory<String, Order> factory = new ConcurrentKafkaListenerContainerFactory<>();
+//        factory.setConsumerFactory(createOrderConsumerFactory);
+//        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
+//        return factory;
+//    }
+    
+    @Bean(CONTAINER_FACTORY_SERVICE.TWO)
     public ConcurrentKafkaListenerContainerFactory<String, Order> createOrderKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Order> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
+        ConcurrentKafkaListenerContainerFactory<String, Order> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(createOrderConsumerFactory());
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
         return factory;
     }
-
 }

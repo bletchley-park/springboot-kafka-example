@@ -1,10 +1,10 @@
-package coding.example;
+package com.rd.intern.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class KafkaApplicationTests {
 
 	@Test
 	void contextLoads() {

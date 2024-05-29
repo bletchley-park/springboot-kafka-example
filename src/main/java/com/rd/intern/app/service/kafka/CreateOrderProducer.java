@@ -1,6 +1,5 @@
-package coding.example.orderService.kafka;
+package com.rd.intern.app.service.kafka;
 
-import coding.example.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,11 +7,12 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
+import com.rd.intern.app.model.Order;
+
 import java.util.concurrent.ExecutionException;
 
 @Service
 public class CreateOrderProducer {
-
     private static final Logger log = LoggerFactory.getLogger(CreateOrderProducer.class);
 
     private final KafkaTemplate<String, Order> createOrderKafkaTemplate;
@@ -22,7 +22,7 @@ public class CreateOrderProducer {
     public CreateOrderProducer(KafkaTemplate<String, Order> createOrderKafkaTemplate, @Value("${spring.kafka.order.topic.create-order}") String createOrderTopic) {
         this.createOrderKafkaTemplate = createOrderKafkaTemplate;
         this.createOrderTopic = createOrderTopic;
-    }
+     }
 
     public boolean sendCreateOrderEvent(Order order) throws ExecutionException, InterruptedException {
         SendResult<String, Order> sendResult = createOrderKafkaTemplate.send(createOrderTopic, order).get();
